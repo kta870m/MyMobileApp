@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "vn.swinburne.mymobileapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "vn.swinburne.mymobileapp"
