@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1019026687615",
+    "project_id": "ambulance-af497",
+    "storage_bucket": "ambulance-af497.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019026687615:android:538fef39004e8fca4ea14a",
+        "android_client_info": {
+          "package_name": "vn.swinburne.mymobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6ClOFecteRLEi1CUoVFQfmCPqpUu5yVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

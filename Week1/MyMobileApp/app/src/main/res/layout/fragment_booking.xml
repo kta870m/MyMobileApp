@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- User/Guest Info -->
+    <TextView
+        android:id="@+id/textViewUserStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Chế độ khách"
+        android:textSize="16sp"
+        android:background="@drawable/rounded_background"
+        android:padding="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- MapView -->
+    <fragment
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewUserStatus"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <!-- Book Ambulance Button -->
+    <Button
+        android:id="@+id/buttonBookAmbulance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:text="Đặt xe cứu thương"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@android:color/white" />
+</RelativeLayout>
