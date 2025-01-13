@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     private var score = 0
     private var currentHold = 0
-    private var hasFallen = false // Đánh dấu nếu người chơi đã rơi
+    private var hasFallen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val btnReset: Button = findViewById(R.id.btnReset)
 
         btnClimb.setOnClickListener {
-            if (!hasFallen && currentHold < 9) { // Không được leo nếu đã rơi
+            if (!hasFallen && currentHold < 9) {
                 currentHold++
                 score += when (currentHold) {
                     in 1..3 -> 1 // Blue zone
@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFall.setOnClickListener {
-            if (currentHold in 1..8 && !hasFallen) { // Không thể rơi ở hold 9
+            if (currentHold in 1..8 && !hasFallen) { 
                 hasFallen = true
-                score = (score - 3).coerceAtLeast(0) // Không để điểm âm
+                score = (score - 3).coerceAtLeast(0) 
                 updateScore(tvScore)
                 Log.d("Fall", "Player has fallen. Current hold: $currentHold, Score: $score")
             }
@@ -76,6 +76,6 @@ class MainActivity : AppCompatActivity() {
         score = savedInstanceState.getInt("score")
         currentHold = savedInstanceState.getInt("currentHold")
         hasFallen = savedInstanceState.getBoolean("hasFallen")
-        updateScore(findViewById(R.id.tvScore)) // Cập nhật điểm và màu
+        updateScore(findViewById(R.id.tvScore))
     }
 }
