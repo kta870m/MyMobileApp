@@ -37,9 +37,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFall.setOnClickListener {
+<<<<<<< HEAD
             if (currentHold in 1..8 && !hasFallen) {
                 hasFallen = true
                 score = (score - 3).coerceAtLeast(0)
+=======
+            if (currentHold in 1..8 && !hasFallen) { 
+                hasFallen = true
+                score = (score - 3).coerceAtLeast(0) 
+>>>>>>> b625a7fefa8b3a9245b831593b8c2ffb1c9ebd5b
                 updateScore(tvScore)
                 Log.d("Fall", "Player has fallen. Current hold: $currentHold, Score: $score")
             }
