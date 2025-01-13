@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
     lateinit var txtNum1: EditText
     lateinit var txtNum2: EditText
     lateinit var txtResult: TextView
+    lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +38,13 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
         txtNum1 = findViewById(R.id.txt_num_1);
         txtNum2 = findViewById(R.id.txt_num_2);
         txtResult = findViewById(R.id.txt_result);
+        textView = findViewById(R.id.textView);
+
 
         btnPlus.setOnClickListener(this);
         btnMinus.setOnClickListener(this);
         btnDivide.setOnClickListener(this);
         btnMutiply.setOnClickListener(this);
-
-
 
     }
 
