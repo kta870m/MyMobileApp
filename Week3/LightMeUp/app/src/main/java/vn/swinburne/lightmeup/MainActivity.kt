@@ -36,5 +36,16 @@ class MainActivity : AppCompatActivity() {
                 iconToggle.setImageResource(R.drawable.icon_in) // Icon ban đầu
             }
         }
+
+        iconToggle.setOnLongClickListener {
+            isToggled = !isToggled
+
+            if (isToggled) {
+                iconToggle.setImageResource(R.drawable.icon_late)
+            } else {
+                iconToggle.setImageResource(R.drawable.icon_in)
+            }
+            true
+        }
     }
 }
