@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Máy tính</string>
+    <string name="toolbar_title">Máy tính</string>
+    <string name="hint_num1">Số thứ nhất</string>
+    <string name="hint_num2">Số thứ hai</string>
+    <string name="operation_plus">Cộng</string>
+    <string name="operation_minus">Trừ</string>
+    <string name="operation_multiply">Nhân</string>
+    <string name="operation_divide">Chia</string>
+    <string name="btn_equal">Bằng</string>
+    <string name="result_text">Kết quả: </string>
+    <string name="error_invalid_input">Dữ liệu không hợp lệ. Vui lòng nhập số hợp lệ.</string>
+    <string name="error_divide_by_zero">Không thể chia cho 0.</string>
+</resources>
