@@ -1,5 +1,6 @@
 package vn.swinburne.climbinggames
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -37,15 +38,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFall.setOnClickListener {
-<<<<<<< HEAD
             if (currentHold in 1..8 && !hasFallen) {
                 hasFallen = true
                 score = (score - 3).coerceAtLeast(0)
-=======
-            if (currentHold in 1..8 && !hasFallen) { 
-                hasFallen = true
-                score = (score - 3).coerceAtLeast(0) 
->>>>>>> b625a7fefa8b3a9245b831593b8c2ffb1c9ebd5b
                 updateScore(tvScore)
                 Log.d("Fall", "Player has fallen. Current hold: $currentHold, Score: $score")
             }
@@ -60,8 +55,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun updateScore(tvScore: TextView) {
-        tvScore.text = "Score: $score"
+        val localizedScoreText = getString(R.string.score).replace("0", score.toString())
+        tvScore.text = localizedScoreText
         when (currentHold) {
             in 1..3 -> tvScore.setTextColor(Color.BLUE) // Blue zone
             in 4..6 -> tvScore.setTextColor(Color.GREEN) // Green zone

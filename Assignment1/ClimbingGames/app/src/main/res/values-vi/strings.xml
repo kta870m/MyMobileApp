@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Trò chơi leo núi</string>
+    <string name="score">\u0110i\u1ec3m: 0</string>
+    <string name="climb">Leo</string>
+    <string name="fall">R\u01a1\u0301i</string>
+    <string name="reset">\u0110\u1eb7t l\u1ea1i</string>
+</resources>
