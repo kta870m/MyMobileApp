@@ -4,4 +4,5 @@
     <string name="fall">Fall</string>
     <string name="reset">Reset</string>
     <string name="score">Score: 0</string>
+    <string name="fall_message">Player has fallen. Current hold: %1$d, Score: %2$d</string>
 </resources>

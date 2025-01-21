@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-
     private var score = 0
     private var currentHold = 0
     private var hasFallen = false
@@ -22,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val btnClimb: Button = findViewById(R.id.btnClimb)
         val btnFall: Button = findViewById(R.id.btnFall)
         val btnReset: Button = findViewById(R.id.btnReset)
+        val txtFallMessage : TextView = findViewById(R.id.txtFallMessage)
 
         btnClimb.setOnClickListener {
             if (!hasFallen && currentHold < 9) {
@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity() {
                 hasFallen = true
                 score = (score - 3).coerceAtLeast(0)
                 updateScore(tvScore)
-                Log.d("Fall", "Player has fallen. Current hold: $currentHold, Score: $score")
+                val fallMessage = getString(R.string.fall_message, currentHold, score)
+                Log.d("Fall", fallMessage)
+
+                txtFallMessage.text = fallMessage;
+                txtFallMessage.setTextColor(Color.RED)
             }
         }
 
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             hasFallen = false
             updateScore(tvScore)
             Log.d("Reset", "Game reset")
+            txtFallMessage.text = "";
         }
     }
 
