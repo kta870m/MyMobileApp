@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 🔥 Đảm bảo rằng RentActivity được khai báo -->
+        <activity android:name=".RentActivity" />
     </application>
+
 
 </manifest>
