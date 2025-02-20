@@ -25,6 +25,10 @@ class RentActivity : AppCompatActivity() {
 
         binding.itemName.text = instrument.name
         binding.itemImage.setImageResource(instrument.imageResId)
+        binding.itemPrice.text = "Price: ${instrument.pricePerMonth.toString()} credits";
+        binding.itemAttributes.text = "Attributes: ${instrument.attributes.joinToString(", ")}"
+
+
 
         binding.saveButton.setOnClickListener {
             if (userCredit >= instrument.pricePerMonth) {

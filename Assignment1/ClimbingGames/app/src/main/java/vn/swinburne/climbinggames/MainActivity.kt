@@ -9,27 +9,32 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    // Initializing variables to keep track of the score, current hold, and fall status
     private var score = 0
     private var currentHold = 0
     private var hasFallen = false
 
+    // This function sets up the activity layout and the initial state
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main) // Setting the layout from XML
 
+        // Finding UI components by their IDs
         val tvScore: TextView = findViewById(R.id.tvScore)
         val btnClimb: Button = findViewById(R.id.btnClimb)
         val btnFall: Button = findViewById(R.id.btnFall)
         val btnReset: Button = findViewById(R.id.btnReset)
         val txtFallMessage : TextView = findViewById(R.id.txtFallMessage)
 
+        // Set up the climb button click listener
         btnClimb.setOnClickListener {
             if (!hasFallen && currentHold < 9) {
+                // Only increase hold and score if the player hasn't fallen and hasn't reached the top
                 currentHold++
                 score += when (currentHold) {
-                    in 1..3 -> 1 // Blue zone
-                    in 4..6 -> 2 // Green zone
-                    in 7..9 -> 3 // Red zone
+                    in 1..3 -> 1 // Blue zone gives 1 point
+                    in 4..6 -> 2 // Green zone gives 2 points
+                    in 7..9 -> 3 // Red zone gives 3 points
                     else -> 0
                 }
                 updateScore(tvScore)
@@ -37,14 +42,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Set up the fall button click listener
         btnFall.setOnClickListener {
+            // Player can only fall if they are on the wall and have not already fallen
             if (currentHold in 1..8 && !hasFallen) {
                 hasFallen = true
-                score = (score - 3).coerceAtLeast(0)
+                score = (score - 3).coerceAtLeast(0) // Reduce score but not below 0
                 updateScore(tvScore)
                 val fallMessage = getString(R.string.fall_message, currentHold, score)
                 Log.d("Fall", fallMessage)
-
                 txtFallMessage.text = fallMessage;
                 txtFallMessage.setTextColor(Color.RED)
             }
@@ -72,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Save the current game state
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("score", score)
@@ -79,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         outState.putBoolean("hasFallen", hasFallen)
     }
 
+    // Restore the game state when the activity is recreated
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         score = savedInstanceState.getInt("score")

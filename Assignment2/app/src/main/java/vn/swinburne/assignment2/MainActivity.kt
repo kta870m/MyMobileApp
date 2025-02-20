@@ -1,6 +1,9 @@
 package vn.swinburne.assignment2
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +46,11 @@ class MainActivity : AppCompatActivity() {
             currentIndex = (currentIndex + 1) % instruments.size
             updateUI()
         }
+
+        // Change the color of the stars in the RatingBar
+        val stars = binding.ratingBar.progressDrawable as LayerDrawable
+        // Change the filled stars to yellow
+        stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
 
         binding.borrowButton.setOnClickListener {
             val instrument = instruments[currentIndex]
