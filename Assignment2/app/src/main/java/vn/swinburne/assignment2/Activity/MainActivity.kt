@@ -1,25 +1,16 @@
-package vn.swinburne.assignment2
+package vn.swinburne.assignment2.Activity
 
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.parcelize.Parcelize
+import vn.swinburne.assignment2.Entity.Instrument
+import vn.swinburne.assignment2.R
 
 import vn.swinburne.assignment2.databinding.ActivityMainBinding
-
-@Parcelize
-data class Instrument(
-    val name: String,
-    val rating: Float,
-    val attributes: List<String>,
-    val pricePerMonth: Int,
-    val imageResId: Int
-) : Parcelable
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

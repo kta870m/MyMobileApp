@@ -1,11 +1,11 @@
-package vn.swinburne.assignment2
+package vn.swinburne.assignment2.Activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import vn.swinburne.assignment2.Entity.Instrument
 import vn.swinburne.assignment2.databinding.ActivityRentBinding
 
 class RentActivity : AppCompatActivity() {
