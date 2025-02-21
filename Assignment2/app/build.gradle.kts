@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.8")
     implementation(libs.material.v190) // Ensure latest version
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -23,6 +23,9 @@
         </activity>
         <!-- 🔥 Đảm bảo rằng RentActivity được khai báo -->
         <activity android:name=".Activity.RentActivity" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 

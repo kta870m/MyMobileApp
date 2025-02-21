@@ -59,6 +59,7 @@
 
     <Button
         android:id="@+id/saveButton"
+        style="@style/LobsterButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -70,6 +71,7 @@
 
     <Button
         android:id="@+id/cancelButton"
+        style="@style/LobsterButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
