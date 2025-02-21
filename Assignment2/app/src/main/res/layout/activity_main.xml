@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +14,8 @@
         android:layout_gravity="center_horizontal"
         android:text="Credits: 500"
         android:textColor="@color/primaryColor"
-        android:textSize="18sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
@@ -77,17 +79,21 @@
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/primaryColor"
+        android:text="Next"
         android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"/>
+        android:textSize="25sp"
+        app:cornerRadius="12dp" />
 
     <Button
         android:id="@+id/borrowButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Borrow"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/accentColor"
+        android:text="Borrow"
         android:textColor="@android:color/white"
-        android:layout_marginTop="8dp"/>
+        android:textSize="25sp"
+        app:cornerRadius="12dp" />
 </LinearLayout>

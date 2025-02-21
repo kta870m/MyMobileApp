@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import vn.swinburne.assignment2.Entity.Instrument
+import vn.swinburne.assignment2.R
 import vn.swinburne.assignment2.databinding.ActivityRentBinding
 
 class RentActivity : AppCompatActivity() {
@@ -17,6 +18,15 @@ class RentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        instrument = intent.getParcelableExtra("instrument_data")!!
+        userCredit = intent.getIntExtra("user_credit", 0)
+
+        when(instrument.name) {
+            "Guitar" -> binding.root.setBackgroundResource(R.drawable.guitar_rental)
+            "Piano" -> binding.root.setBackgroundResource(R.drawable.piano_rental)
+            "Violin" -> binding.root.setBackgroundResource(R.drawable.violin_rental)
+        }
 
         supportActionBar?.title = "Confirm Booking"
 
