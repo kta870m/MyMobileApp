@@ -13,9 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Credits: 500"
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/lobster"
+        />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
@@ -47,7 +49,9 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/primaryColor"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/lobster"
+                />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -63,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/primaryColor"
+                android:fontFamily="@font/lobster"
                 android:textSize="25sp" />
 
             <TextView
@@ -71,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/secondaryColor"
+                android:fontFamily="@font/lobster"
                 android:textSize="25sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

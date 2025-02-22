@@ -3,8 +3,10 @@ package vn.swinburne.assignment2.Activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import vn.swinburne.assignment2.Entity.Instrument
 import vn.swinburne.assignment2.R
 import vn.swinburne.assignment2.databinding.ActivityRentBinding
@@ -28,7 +30,20 @@ class RentActivity : AppCompatActivity() {
             "Violin" -> binding.root.setBackgroundResource(R.drawable.violin_rental)
         }
 
-        supportActionBar?.title = "Confirm Booking"
+        //Set custom font for ActionBar title
+        val customTitle = TextView(this)
+        customTitle.text = "Confirm Booking"
+        customTitle.textSize = 20f
+        customTitle.setTextColor(resources.getColor(android.R.color.white))
+
+        // Set Lobster font
+        val lobsterFont = ResourcesCompat.getFont(this, R.font.lobster)
+        customTitle.typeface = lobsterFont
+
+        supportActionBar?.apply {
+            displayOptions = androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM
+            customView = customTitle
+        }
 
         instrument = intent.getParcelableExtra("instrument_data")!!
         userCredit = intent.getIntExtra("user_credit", 0)

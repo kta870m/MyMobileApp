@@ -5,7 +5,9 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
 import vn.swinburne.assignment2.Entity.Instrument
 import vn.swinburne.assignment2.R
@@ -27,7 +29,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Instrument Rental"
+
+        //Set custom font for ActionBar title
+        val customTitle = TextView(this)
+        customTitle.text = "Instrument Rental"
+        customTitle.textSize = 20f
+        customTitle.setTextColor(resources.getColor(android.R.color.white))
+
+        // Set Lobster font
+        val lobsterFont = ResourcesCompat.getFont(this, R.font.lobster)
+        customTitle.typeface = lobsterFont
+
+        supportActionBar?.apply {
+            displayOptions = androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM
+            customView = customTitle
+        }
+
         // Set background image
         binding.root.setBackgroundResource(R.drawable.studio)
 
