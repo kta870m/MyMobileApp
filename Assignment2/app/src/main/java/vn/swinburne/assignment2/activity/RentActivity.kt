@@ -7,6 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.snackbar.Snackbar
 import vn.swinburne.assignment2.instrument.Instrument
 import vn.swinburne.assignment2.R
 import vn.swinburne.assignment2.databinding.ActivityRentBinding
@@ -60,11 +61,12 @@ class RentActivity : AppCompatActivity() {
                 userCredit -= instrument.pricePerMonth
                 val resultIntent = Intent()
                 resultIntent.putExtra("updated_credit", userCredit)
+                resultIntent.putExtra("rented_instrument_name", instrument.name) // Pass instrument name
                 setResult(Activity.RESULT_OK, resultIntent)
-                Toast.makeText(this, "Successfully booked ${instrument.name}!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Successfully booked ${instrument.name}!", Snackbar.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Not enough credits!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Not enough credits!", Snackbar.LENGTH_SHORT).show()
             }
         }
 

@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
 import vn.swinburne.assignment2.instrument.Instrument
 import vn.swinburne.assignment2.R
-
 import vn.swinburne.assignment2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         // Change the color of the stars in the RatingBar
         val stars = binding.ratingBar.progressDrawable as LayerDrawable
-        // Change the filled stars to yellow
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
 
         binding.borrowButton.setOnClickListener {
@@ -77,7 +75,9 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_RENT && resultCode == RESULT_OK) {
             userCredit = data?.getIntExtra("updated_credit", userCredit) ?: userCredit
+            val rentedInstrumentName = data?.getStringExtra("rented_instrument_name") ?: "Instrument"
             updateUI()
+            Snackbar.make(binding.root, "Successfully booked $rentedInstrumentName!", Snackbar.LENGTH_SHORT).show()
         }
     }
 
