@@ -1,4 +1,4 @@
-package vn.swinburne.assignment2.Activity
+package vn.swinburne.assignment2.activity
 
 import android.content.Intent
 import android.graphics.Color
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
-import vn.swinburne.assignment2.Entity.Instrument
+import vn.swinburne.assignment2.instrument.Instrument
 import vn.swinburne.assignment2.R
 
 import vn.swinburne.assignment2.databinding.ActivityMainBinding

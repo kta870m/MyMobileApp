@@ -1,4 +1,4 @@
-package vn.swinburne.assignment2.Entity
+package vn.swinburne.assignment2.instrument
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
