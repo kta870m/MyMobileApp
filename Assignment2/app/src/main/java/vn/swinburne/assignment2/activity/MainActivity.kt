@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(binding.root, "Not enough credits to rent this instrument!", Snackbar.LENGTH_LONG).show()
             }
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -76,8 +77,15 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_RENT && resultCode == RESULT_OK) {
             userCredit = data?.getIntExtra("updated_credit", userCredit) ?: userCredit
             val rentedInstrumentName = data?.getStringExtra("rented_instrument_name") ?: "Instrument"
+            val selectedAccessories = data?.getStringExtra("selected_accessories") ?: "No accessories"
+
             updateUI()
-            Snackbar.make(binding.root, "Successfully booked $rentedInstrumentName!", Snackbar.LENGTH_SHORT).show()
+
+            if(selectedAccessories.isNotEmpty()){
+                Snackbar.make(binding.root, "Successfully booked $rentedInstrumentName with accessories: $selectedAccessories!", Snackbar.LENGTH_LONG).show()
+            }else{
+                Snackbar.make(binding.root, "Successfully booked $rentedInstrumentName", Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -89,6 +97,13 @@ class MainActivity : AppCompatActivity() {
         binding.itemPrice.text = "Price: ${instrument.pricePerMonth} credits"
         binding.itemAttributes.text = "Attributes: ${instrument.attributes.joinToString(", ")}"
         binding.creditText.text = "Credits: $userCredit"
+
+
+        if(userCredit == 0){
+            binding.creditText.setTextColor(Color.RED);
+        }else{
+            binding.creditText.setTextColor(Color.WHITE);
+        }
     }
 
     companion object {

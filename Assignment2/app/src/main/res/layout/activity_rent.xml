@@ -9,15 +9,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:padding="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="323dp"
-            android:layout_marginTop="70dp"
+            android:layout_height="339dp"
             android:background="#fff"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -36,28 +34,104 @@
                 android:fontFamily="@font/lobster"
                 android:textColor="@color/primaryColor"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/itemPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/primaryColor"
-                android:textSize="25sp"
                 android:fontFamily="@font/lobster"
-                />
+                android:textColor="@color/primaryColor"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/itemAttributes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/primaryColor"
                 android:fontFamily="@font/lobster"
+                android:textColor="@color/primaryColor"
                 android:textSize="25sp" />
 
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:layout_marginTop="5dp"
+        android:padding="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:layout_marginTop="0dp"
+            android:background="#fff"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="11dp"
+                android:fontFamily="@font/lobster"
+                android:text="Assesories"
+                android:textColor="@color/primaryColor"
+                android:textSize="30dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupAccessories"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipExtraStrings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:checkable="true"
+                    android:fontFamily="@font/lobster"
+                    android:text="(+20 credits)"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:checkedIconVisible="false"
+                    app:chipBackgroundColor="@color/secondaryColor"
+                    app:chipIcon="@drawable/ic_strings"
+                    app:chipIconSize="40dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCarryingCase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:checkable="true"
+                    android:text="(+30 credits)"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:checkedIconVisible="false"
+                    app:chipBackgroundColor="@color/secondaryColor"
+                    app:chipIcon="@drawable/ic_cases"
+                    app:chipIconSize="40dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAmplifier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:checkable="true"
+                    android:text="(+50 credits)"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:checkedIconVisible="false"
+                    app:chipBackgroundColor="@color/secondaryColor"
+                    app:chipIcon="@drawable/ic_amplifier"
+                    app:chipIconSize="40dp" />
+            </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -67,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/primaryColor"
         android:text="Save"
         android:textSize="25sp"
