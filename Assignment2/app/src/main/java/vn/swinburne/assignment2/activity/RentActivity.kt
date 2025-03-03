@@ -168,6 +168,7 @@ class RentActivity : AppCompatActivity() {
         // Add Custom View to Snackbar
         snackbarLayout.addView(customView, 0)
         snackbar.show()
+        
     }
 }
 

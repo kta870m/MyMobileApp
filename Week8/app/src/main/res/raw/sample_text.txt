@@ -1,0 +1,5 @@
+Hello, World!
+Welcome to Android Development.
+This is a simple file read example.
+Kotlin makes it fun and easy to work with files.
+Enjoy your coding journey!
