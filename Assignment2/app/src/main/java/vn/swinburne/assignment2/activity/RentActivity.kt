@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -89,10 +92,10 @@ class RentActivity : AppCompatActivity() {
                 resultIntent.putExtra("selected_accessories", getSelectedAccessories()) // Send selected accessories
                 setResult(Activity.RESULT_OK, resultIntent)
 
-                Snackbar.make(binding.root, "Successfully booked ${instrument.name}!", Snackbar.LENGTH_SHORT).show()
+                showCustomSnackbar(binding.root, "Successfully booked ${instrument.name}!")
                 finish()
             } else {
-                Snackbar.make(binding.root, "Not enough credits!", Snackbar.LENGTH_SHORT).show()
+                showCustomSnackbar(binding.root, "Not enough credits!")
             }
         }
 
@@ -136,7 +139,7 @@ class RentActivity : AppCompatActivity() {
                     message = "Removed $name: -$price credits. Total: $totalCost credits"
                     listChip[i].chipBackgroundColor = ColorStateList.valueOf(resources.getColor(R.color.secondaryColor))
                 }
-                Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+                showCustomSnackbar(binding.root, message)
             }
 
             binding.chipGroupAccessories.addView(listChip[i])
@@ -149,6 +152,22 @@ class RentActivity : AppCompatActivity() {
         binding.chipExtraStrings.typeface = lobsterFont
         binding.chipCarryingCase.typeface = lobsterFont
         binding.chipAmplifier.typeface = lobsterFont
+    }
+
+    @SuppressLint("RestrictedApi", "ResourceAsColor")
+    fun showCustomSnackbar(view: View, message: String) {
+        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        val customView = LayoutInflater.from(view.context).inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+        customView.setBackgroundColor(customView.context.getColor(R.color.secondaryColor)) // Custom background color
+        snackbar.setTextColor(Color.WHITE) // Custom text color
+        val textView = customView.findViewById<TextView>(R.id.snackbar_text)
+        textView.text = message
+        textView.textSize = 20f
+        // Add Custom View to Snackbar
+        snackbarLayout.addView(customView, 0)
+        snackbar.show()
     }
 }
 
