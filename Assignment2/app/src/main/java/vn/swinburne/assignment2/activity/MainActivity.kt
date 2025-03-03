@@ -1,10 +1,13 @@
 package vn.swinburne.assignment2.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -16,12 +19,33 @@ import vn.swinburne.assignment2.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val instruments = listOf(
-        Instrument("Guitar", 4.5f, listOf("Electric", "Acoustic"), 100, R.drawable.guitar),
-        Instrument("Piano", 5.0f, listOf("Grand", "Upright"), 300, R.drawable.piano),
-        Instrument("Violin", 4.0f, listOf("Classic", "Electric"), 150, R.drawable.violin)
+        Instrument(
+            "Guitar", 4.5f, listOf("Electric", "Acoustic"), 100, R.drawable.guitar,
+            mapOf(
+                "Extra Strings" to 20,
+                "Guitar Strap" to 15,
+                "Capo" to 10
+            )
+        ),
+        Instrument(
+            "Piano", 5.0f, listOf("Grand", "Upright"), 300, R.drawable.piano,
+            mapOf(
+                "Keyboard Stand" to 40,
+                "Piano Bench" to 50,
+                "Dust Cover" to 20
+            )
+        ),
+        Instrument(
+            "Violin", 4.0f, listOf("Classic", "Electric"), 150, R.drawable.violin,
+            mapOf(
+                "Extra Bow" to 25,
+                "Violin Shoulder Rest" to 30,
+                "Rosin" to 10
+            )
+        )
     )
     private var currentIndex = 0
-    private var userCredit = 500  // Example user credit
+    private var userCredit = 1000  // Example user credit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,10 +87,10 @@ class MainActivity : AppCompatActivity() {
             if (userCredit >= instrument.pricePerMonth) {
                 val intent = Intent(this, RentActivity::class.java)
                 intent.putExtra("instrument_data", instrument)
-                intent.putExtra("user_credit", userCredit) // Pass credit to next activity
+                intent.putExtra("user_credit", userCredit)
                 startActivityForResult(intent, REQUEST_CODE_RENT)
             } else {
-                Snackbar.make(binding.root, "Not enough credits to rent this instrument!", Snackbar.LENGTH_LONG).show()
+                showCustomSnackbar(binding.root, "Not enough credits to rent this instrument!")
             }
         }
 
@@ -78,13 +102,12 @@ class MainActivity : AppCompatActivity() {
             userCredit = data?.getIntExtra("updated_credit", userCredit) ?: userCredit
             val rentedInstrumentName = data?.getStringExtra("rented_instrument_name") ?: "Instrument"
             val selectedAccessories = data?.getStringExtra("selected_accessories") ?: "No accessories"
-
             updateUI()
 
             if(selectedAccessories.isNotEmpty()){
-                Snackbar.make(binding.root, "Successfully booked $rentedInstrumentName with accessories: $selectedAccessories!", Snackbar.LENGTH_LONG).show()
+                showCustomSnackbar(binding.root, "Successfully booked $rentedInstrumentName with accessories: $selectedAccessories!")
             }else{
-                Snackbar.make(binding.root, "Successfully booked $rentedInstrumentName", Snackbar.LENGTH_LONG).show()
+                showCustomSnackbar(binding.root, "Successfully booked $rentedInstrumentName")
             }
         }
     }
@@ -108,5 +131,21 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_CODE_RENT = 1001
+    }
+
+    @SuppressLint("RestrictedApi", "ResourceAsColor")
+    fun showCustomSnackbar(view: View, message: String) {
+        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        val customView = LayoutInflater.from(view.context).inflate(R.layout.custom_snackbar, null)
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+
+        customView.setBackgroundColor(customView.context.getColor(R.color.secondaryColor)) // Custom background color
+        snackbar.setTextColor(Color.WHITE) // Custom text color
+        val textView = customView.findViewById<TextView>(R.id.snackbar_text)
+        textView.text = message
+        textView.textSize = 20f
+        // Add Custom View to Snackbar
+        snackbarLayout.addView(customView, 0)
+        snackbar.show()
     }
 }

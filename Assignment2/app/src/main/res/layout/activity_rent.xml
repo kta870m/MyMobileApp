@@ -89,45 +89,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:padding="5dp"
                 app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipExtraStrings"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:checkable="true"
                     android:fontFamily="@font/lobster"
-                    android:text="(+20 credits)"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:checkedIconVisible="false"
+                    android:textAlignment="center"
+                    app:iconStartPadding="10dp"
                     app:chipBackgroundColor="@color/secondaryColor"
                     app:chipIcon="@drawable/ic_strings"
                     app:chipIconSize="40dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipCarryingCase"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:checkable="true"
-                    android:text="(+30 credits)"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    app:iconStartPadding="10dp"
                     app:checkedIconVisible="false"
+                    android:textAlignment="center"
                     app:chipBackgroundColor="@color/secondaryColor"
                     app:chipIcon="@drawable/ic_cases"
                     app:chipIconSize="40dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipAmplifier"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:checkable="true"
-                    android:text="(+50 credits)"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:checkedIconVisible="false"
+                    app:iconStartPadding="10dp"
+                    android:textAlignment="center"
                     app:chipBackgroundColor="@color/secondaryColor"
                     app:chipIcon="@drawable/ic_amplifier"
                     app:chipIconSize="40dp" />

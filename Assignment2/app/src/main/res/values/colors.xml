@@ -10,6 +10,7 @@
     <color name="primaryDarkColor">#5D4037</color>
     <color name="accentColor">#795548</color>
     <color name="secondaryColor">#5D4037</color>
+    <color name="grey">#808080</color>
 </resources>
 
 

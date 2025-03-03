@@ -9,5 +9,6 @@ data class Instrument(
     val rating: Float,
     val attributes: List<String>,
     val pricePerMonth: Int,
-    val imageResId: Int
+    val imageResId: Int,
+    val accessories: Map<String, Int>
 ) : Parcelable
