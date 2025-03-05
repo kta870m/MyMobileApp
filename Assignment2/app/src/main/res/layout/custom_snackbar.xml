@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="@android:color/white"
+        android:fontFamily="@font/lobster"
         android:textSize="30sp" />
 </LinearLayout>

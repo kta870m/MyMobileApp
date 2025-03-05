@@ -14,6 +14,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
 import vn.swinburne.assignment2.instrument.Instrument
 import vn.swinburne.assignment2.R
+import vn.swinburne.assignment2.common.AppUtils
 import vn.swinburne.assignment2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         )
     )
     private var currentIndex = 0
-    private var userCredit = 1000  // Example user credit
+    private var userCredit = 500  // Example user credit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +91,8 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("user_credit", userCredit)
                 startActivityForResult(intent, REQUEST_CODE_RENT)
             } else {
-                showCustomSnackbar(binding.root, "Not enough credits to rent this instrument!")
+                AppUtils.showCustomSnackbar(binding.root, "Not enough credits to rent this instrument!")
+                AppUtils.playSound(this, "failed")
             }
         }
 
@@ -105,9 +107,9 @@ class MainActivity : AppCompatActivity() {
             updateUI()
 
             if(selectedAccessories.isNotEmpty()){
-                showCustomSnackbar(binding.root, "Successfully booked $rentedInstrumentName with accessories: $selectedAccessories!")
+                AppUtils.showCustomSnackbar(binding.root, "Successfully booked $rentedInstrumentName with accessories: $selectedAccessories!")
             }else{
-                showCustomSnackbar(binding.root, "Successfully booked $rentedInstrumentName")
+                AppUtils.showCustomSnackbar(binding.root, "Successfully booked $rentedInstrumentName")
             }
         }
     }
@@ -133,19 +135,4 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_CODE_RENT = 1001
     }
 
-    @SuppressLint("RestrictedApi", "ResourceAsColor")
-    fun showCustomSnackbar(view: View, message: String) {
-        val snackbar = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        val customView = LayoutInflater.from(view.context).inflate(R.layout.custom_snackbar, null)
-        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
-
-        customView.setBackgroundColor(customView.context.getColor(R.color.secondaryColor)) // Custom background color
-        snackbar.setTextColor(Color.WHITE) // Custom text color
-        val textView = customView.findViewById<TextView>(R.id.snackbar_text)
-        textView.text = message
-        textView.textSize = 20f
-        // Add Custom View to Snackbar
-        snackbarLayout.addView(customView, 0)
-        snackbar.show()
-    }
 }

@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="748dp"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -82,7 +82,7 @@
                 android:fontFamily="@font/lobster"
                 android:text="Assesories"
                 android:textColor="@color/primaryColor"
-                android:textSize="30dp" />
+                android:textSize="25dp" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupAccessories"
@@ -99,43 +99,72 @@
                     android:layout_height="50dp"
                     android:checkable="true"
                     android:fontFamily="@font/lobster"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:checkedIconVisible="false"
-                    android:textAlignment="center"
-                    app:iconStartPadding="10dp"
                     app:chipBackgroundColor="@color/secondaryColor"
                     app:chipIcon="@drawable/ic_strings"
-                    app:chipIconSize="40dp" />
+                    app:chipIconSize="40dp"
+                    app:iconStartPadding="10dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipCarryingCase"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:checkable="true"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    app:iconStartPadding="10dp"
                     app:checkedIconVisible="false"
-                    android:textAlignment="center"
                     app:chipBackgroundColor="@color/secondaryColor"
                     app:chipIcon="@drawable/ic_cases"
-                    app:chipIconSize="40dp" />
+                    app:chipIconSize="40dp"
+                    app:iconStartPadding="10dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipAmplifier"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:checkable="true"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:checkedIconVisible="false"
-                    app:iconStartPadding="10dp"
-                    android:textAlignment="center"
                     app:chipBackgroundColor="@color/secondaryColor"
                     app:chipIcon="@drawable/ic_amplifier"
-                    app:chipIconSize="40dp" />
+                    app:chipIconSize="40dp"
+                    app:iconStartPadding="10dp" />
             </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:padding="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+            android:layout_marginTop="0dp"
+            android:background="#fff"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editDescription"
+                android:layout_width="313dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/lobster"
+                android:inputType="text"
+                android:text="Description"
+                android:textSize="25dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -145,7 +174,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/primaryColor"
         android:text="Save"
         android:textSize="25sp"
@@ -157,7 +186,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="@color/secondaryColor"
         android:text="Cancel"
         android:textSize="25sp"
