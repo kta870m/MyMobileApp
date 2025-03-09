@@ -37,7 +37,7 @@
                 android:text="Description"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins"
-                android:textColor="@color/yellow"/>
+                android:textColor="@color/black"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

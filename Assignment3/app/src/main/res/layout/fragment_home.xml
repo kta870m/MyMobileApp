@@ -30,10 +30,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <ImageView
+            android:id="@+id/emptyNotesImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/emptyNotesImage"
             android:visibility="gone"
+            android:scaleType="centerCrop"
             android:src="@drawable/emptybkg"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
