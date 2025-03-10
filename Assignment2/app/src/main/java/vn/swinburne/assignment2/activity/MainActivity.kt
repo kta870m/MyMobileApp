@@ -1,17 +1,13 @@
 package vn.swinburne.assignment2.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.google.android.material.snackbar.Snackbar
 import vn.swinburne.assignment2.instrument.Instrument
 import vn.swinburne.assignment2.R
 import vn.swinburne.assignment2.common.AppUtils

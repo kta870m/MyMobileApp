@@ -91,9 +91,9 @@ class RentActivity : AppCompatActivity() {
             }
 
             // Check selected chips and add cost
-            if (binding.chipExtraStrings.isChecked) totalCost += 20
-            if (binding.chipCarryingCase.isChecked) totalCost += 30
-            if (binding.chipAmplifier.isChecked) totalCost += 50
+            if (binding.chipExtraStrings.isChecked) totalCost += instrument.accessories.values.toList()[0]
+            if (binding.chipCarryingCase.isChecked) totalCost += instrument.accessories.values.toList()[2]
+            if (binding.chipAmplifier.isChecked) totalCost += instrument.accessories.values.toList()[1]
 
             if (userCredit >= totalCost) {
                 userCredit -= totalCost
@@ -146,7 +146,7 @@ class RentActivity : AppCompatActivity() {
                     listChip[i].chipBackgroundColor = ColorStateList.valueOf(resources.getColor(R.color.primaryColor))
                     AppUtils.playSound(this, "checked")
                 } else {
-                    totalCost
+                    totalCost -= price
                     message = "Removed $name: -$price credits. Total: $totalCost credits"
                     listChip[i].chipBackgroundColor = ColorStateList.valueOf(resources.getColor(R.color.secondaryColor))
                     AppUtils.playSound(this,"unchecked")
