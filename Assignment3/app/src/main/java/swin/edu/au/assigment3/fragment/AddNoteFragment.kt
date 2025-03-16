@@ -1,7 +1,11 @@
 package swin.edu.au.assigment3.fragment
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +24,7 @@ import swin.edu.au.assigment3.MainActivity
 import swin.edu.au.assigment3.R
 import swin.edu.au.assigment3.databinding.FragmentAddNoteBinding
 import swin.edu.au.assigment3.model.Note
+import swin.edu.au.assigment3.receiver.ReminderReceiver
 import swin.edu.au.assigment3.viewmodel.NoteViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -81,9 +86,46 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), MenuProvider {
         val noteDateTimeStr = binding.addNoteDateTimeInput.text.toString().trim()
 
         if (noteTitle.isNotEmpty()) {
+            val note = Note(0, noteTitle, noteDesc, noteDateTimeStr)
+            notesViewModel.addNote(note)
+
             if (noteDateTimeStr.isNotEmpty()) {
-                // Validate nếu datetime có nhập
                 val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                val targetDate = sdf.parse(noteDateTimeStr)
+
+                targetDate?.let {
+                    val now = Calendar.getInstance().time
+
+                    if (it.before(now)) {
+                        Snackbar.make(addNoteView, "Datetime must be present or future", Snackbar.LENGTH_LONG).show()
+                        return
+                    }
+
+                    // Đặt Alarm sau khi xác nhận là đúng giờ
+                    val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    val intent = Intent(requireContext(), ReminderReceiver::class.java).apply {
+                        putExtra("title", noteTitle)
+                        putExtra("desc", noteDesc)
+                    }
+
+                    val pendingIntent = PendingIntent.getBroadcast(
+                        requireContext(),
+                        note.hashCode(),
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+
+                    try {
+                        alarmManager.setAlarmClock(
+                            AlarmManager.AlarmClockInfo(it.time, pendingIntent),
+                            pendingIntent
+                        )
+                    } catch (e: SecurityException) {
+                        e.printStackTrace()
+                        Snackbar.make(addNoteView, "Can't schedule exact alarm on this device!", Snackbar.LENGTH_LONG).show()
+                    }
+                }
+
                 try {
                     val selectedDate = sdf.parse(noteDateTimeStr)
                     val now = Calendar.getInstance().time
@@ -97,10 +139,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), MenuProvider {
                     return
                 }
             }
-
-            // Trường hợp datetime để trống hoặc hợp lệ đều tới đây
-            val note = Note(0, noteTitle, noteDesc, noteDateTimeStr)
-            notesViewModel.addNote(note)
             Toast.makeText(addNoteView.context, "Note Saved", Toast.LENGTH_SHORT).show()
             view.findNavController().popBackStack(R.id.homeFragment, false)
         } else {
