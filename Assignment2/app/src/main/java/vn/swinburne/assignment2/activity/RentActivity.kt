@@ -1,62 +1,70 @@
 package vn.swinburne.assignment2.activity
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.children
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import vn.swinburne.assignment2.instrument.Instrument
 import vn.swinburne.assignment2.R
 import vn.swinburne.assignment2.common.AppUtils
 import vn.swinburne.assignment2.databinding.ActivityRentBinding
 
 class RentActivity : AppCompatActivity() {
+    // View Binding for activity_rent.xml
     private lateinit var binding: ActivityRentBinding
+
+    // Selected instrument passed from MainActivity
     private lateinit var instrument: Instrument
+
+    // EditText for user description input
     private lateinit var txtDescription : EditText
+
+    // User's available credits
     private var userCredit: Int = 0
+
+    // Total cost including instrument and selected accessories
     private var totalCost: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Retrieve instrument data and user credit from the Intent
         instrument = intent.getParcelableExtra("instrument_data")!!
         userCredit = intent.getIntExtra("user_credit", 0)
 
         txtDescription = findViewById(R.id.editDescription)
 
+        // List of pre-defined Chips in XML
         var listChip = listOf(
             findViewById<Chip>(R.id.chipExtraStrings),
             findViewById<Chip>(R.id.chipAmplifier),
             findViewById<Chip>(R.id.chipCarryingCase),
         );
 
+        // Apply Lobster font to chips
         setChipFonts()
+
+        // Set listeners for chips
         setupChipClickListeners(listChip)
 
+        // Change background based on selected instrument
         when(instrument.name) {
             "Guitar" -> binding.root.setBackgroundResource(R.drawable.guitar_rental)
             "Piano" -> binding.root.setBackgroundResource(R.drawable.piano_rental)
             "Violin" -> binding.root.setBackgroundResource(R.drawable.violin_rental)
         }
 
-        totalCost = instrument.pricePerMonth;
+        totalCost = instrument.pricePerMonth; // Initialize total cost with instrument price
 
-        //Set custom font for ActionBar title
+        // Customize ActionBar title
         val customTitle = TextView(this)
         customTitle.text = "Confirm Booking"
         customTitle.textSize = 20f
@@ -74,16 +82,17 @@ class RentActivity : AppCompatActivity() {
         instrument = intent.getParcelableExtra("instrument_data")!!
         userCredit = intent.getIntExtra("user_credit", 0)
 
+        // Display instrument details on the screen
         binding.itemName.text = instrument.name
         binding.itemImage.setImageResource(instrument.imageResId)
         binding.itemPrice.text = "Price: ${instrument.pricePerMonth.toString()} credits";
         binding.itemAttributes.text = "Attributes: ${instrument.attributes.joinToString(", ")}"
 
-
-
+        // Save button logic
         binding.saveButton.setOnClickListener {
             var totalCost = instrument.pricePerMonth
 
+            // Require description before booking
             if (txtDescription.text.isNullOrBlank()) {
                 AppUtils.showCustomSnackbar(binding.root, "Please enter a description before proceeding!")
                 AppUtils.playSound(this, "failed")
@@ -95,6 +104,7 @@ class RentActivity : AppCompatActivity() {
             if (binding.chipCarryingCase.isChecked) totalCost += instrument.accessories.values.toList()[2]
             if (binding.chipAmplifier.isChecked) totalCost += instrument.accessories.values.toList()[1]
 
+            // If enough credits -> book success
             if (userCredit >= totalCost) {
                 userCredit -= totalCost
                 val resultIntent = Intent()
@@ -112,6 +122,7 @@ class RentActivity : AppCompatActivity() {
             }
         }
 
+        // Cancel button logic
         binding.cancelButton.setOnClickListener {
             setResult(Activity.RESULT_CANCELED)
             finish()
@@ -120,7 +131,7 @@ class RentActivity : AppCompatActivity() {
 
     }
 
-    // Function to get selected accessories as a string
+    // Collect selected accessories and return as a comma-separated string
     private fun getSelectedAccessories(): String {
         val selectedAccessories = mutableListOf<String>()
         if (binding.chipExtraStrings.isChecked) selectedAccessories.add(binding.chipExtraStrings.text.toString())
@@ -130,6 +141,7 @@ class RentActivity : AppCompatActivity() {
     }
 
 
+    // Dynamically bind data to chips & handle chip click events
     private fun setupChipClickListeners(listChip : List<Chip>) {
         binding.chipGroupAccessories.removeAllViews()
         for (i in 0 until listChip.count()) {
@@ -159,6 +171,7 @@ class RentActivity : AppCompatActivity() {
 
     }
 
+    // Apply Lobster font to predefined chips
     private fun setChipFonts() {
         val lobsterFont: Typeface? = ResourcesCompat.getFont(this, R.font.lobster)
         binding.chipExtraStrings.typeface = lobsterFont

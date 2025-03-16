@@ -14,7 +14,10 @@ import vn.swinburne.assignment2.common.AppUtils
 import vn.swinburne.assignment2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    // View Binding for activity_main.xml
     private lateinit var binding: ActivityMainBinding
+
+    // List of available instruments with their attributes and accessories
     private val instruments = listOf(
         Instrument(
             "Guitar", 4.5f, listOf("Electric", "Acoustic"), 100, R.drawable.guitar,
@@ -41,8 +44,10 @@ class MainActivity : AppCompatActivity() {
             )
         )
     )
+
+    // Index to track the currently displayed instrument
     private var currentIndex = 0
-    private var userCredit = 500  // Example user credit
+    private var userCredit = 550 // Default user credit to rent instruments
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        //Set custom font for ActionBar title
+        // Customize ActionBar with a custom title and font
         val customTitle = TextView(this)
         customTitle.text = "Instrument Rental"
         customTitle.textSize = 20f
@@ -65,20 +70,22 @@ class MainActivity : AppCompatActivity() {
             customView = customTitle
         }
 
-        // Set background image
+        // Set background image for the main screen
         binding.root.setBackgroundResource(R.drawable.studio)
 
-        updateUI()
+        updateUI() // Initial UI setup
 
+        // Next button to switch to the next instrument
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % instruments.size
             updateUI()
         }
 
-        // Change the color of the stars in the RatingBar
+        // Customize RatingBar star color to yello
         val stars = binding.ratingBar.progressDrawable as LayerDrawable
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
 
+        // Borrow button click listener
         binding.borrowButton.setOnClickListener {
             val instrument = instruments[currentIndex]
             if (userCredit >= instrument.pricePerMonth) {
@@ -94,6 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Handle data returned from RentActivity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_RENT && resultCode == RESULT_OK) {
@@ -110,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Update instrument info on screen
     private fun updateUI() {
         val instrument = instruments[currentIndex]
         binding.instrumentName.text = instrument.name
@@ -127,6 +136,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Request code constant
     companion object {
         private const val REQUEST_CODE_RENT = 1001
     }
