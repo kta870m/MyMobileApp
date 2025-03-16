@@ -28,6 +28,30 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <!-- DateTime + Icon -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/baseline_time_24"
+                android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/noteDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Date &amp; Time"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/noteDesc"
                 android:layout_width="match_parent"

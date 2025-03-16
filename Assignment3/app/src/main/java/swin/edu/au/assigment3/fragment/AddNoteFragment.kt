@@ -1,5 +1,7 @@
 package swin.edu.au.assigment3.fragment
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,11 +15,15 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import swin.edu.au.assigment3.MainActivity
 import swin.edu.au.assigment3.R
 import swin.edu.au.assigment3.databinding.FragmentAddNoteBinding
 import swin.edu.au.assigment3.model.Note
 import swin.edu.au.assigment3.viewmodel.NoteViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class AddNoteFragment : Fragment(R.layout.fragment_add_note), MenuProvider {
@@ -43,20 +49,62 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), MenuProvider {
 
         notesViewModel = (activity as MainActivity).noteViewModel
         addNoteView = view
+
+        // DateTime Picker ở đây:
+        binding.addNoteDateTimeInput.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            // Date Picker
+            DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+
+                // Time Picker
+                val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                val minute = calendar.get(Calendar.MINUTE)
+
+                TimePickerDialog(requireContext(), { _, selectedHour, selectedMinute ->
+                    val formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
+                    val dateTime = "$selectedDate $formattedTime"
+                    binding.addNoteDateTimeInput.setText(dateTime)
+                }, hour, minute, true).show()
+
+            }, year, month, day).show()
+        }
     }
 
     private fun saveNote(view: View){
         val noteTitle = binding.addNoteTitle.text.toString().trim()
         val noteDesc = binding.addNoteDesc.text.toString().trim()
+        val noteDateTimeStr = binding.addNoteDateTimeInput.text.toString().trim()
 
-        if(noteTitle.isNotEmpty()){
-            val note = Note(0, noteTitle, noteDesc)
+        if (noteTitle.isNotEmpty()) {
+            if (noteDateTimeStr.isNotEmpty()) {
+                // Validate nếu datetime có nhập
+                val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                try {
+                    val selectedDate = sdf.parse(noteDateTimeStr)
+                    val now = Calendar.getInstance().time
+
+                    if (selectedDate.before(now)) {
+                        Snackbar.make(addNoteView, "Datetime must be present or future", Snackbar.LENGTH_LONG).show()
+                        return
+                    }
+                } catch (e: Exception) {
+                    Snackbar.make(addNoteView, "Invalid datetime format!", Snackbar.LENGTH_LONG).show()
+                    return
+                }
+            }
+
+            // Trường hợp datetime để trống hoặc hợp lệ đều tới đây
+            val note = Note(0, noteTitle, noteDesc, noteDateTimeStr)
             notesViewModel.addNote(note)
-
             Toast.makeText(addNoteView.context, "Note Saved", Toast.LENGTH_SHORT).show()
             view.findNavController().popBackStack(R.id.homeFragment, false)
-        }else{
-            Toast.makeText(addNoteView.context, "Please enter note title", Toast.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(addNoteView, "Please enter note title", Snackbar.LENGTH_SHORT).show()
         }
     }
 

@@ -20,6 +20,7 @@
             android:textStyle="bold"
             android:textColor="@color/yellow_darker"
             android:textSize="24sp" />
+
         <EditText
             android:id="@+id/editNoteTitle"
             android:layout_width="match_parent"
@@ -32,18 +33,33 @@
             android:layout_marginTop="16dp"
             android:maxLines="1"
             android:fontFamily="@font/poppins"/>
+
+        <EditText
+            android:id="@+id/editNoteDateTimeInput"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/editNoteHeading"
+            android:layout_marginTop="92dp"
+            android:background="@drawable/pink_border"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Select date and time"
+            android:padding="12dp"
+            android:textSize="18sp" />
+
         <EditText
             android:id="@+id/editNoteDesc"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter the description"
-            android:gravity="top"
-            android:padding="12dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins"
+            android:layout_width="388dp"
+            android:layout_height="412dp"
+            android:layout_below="@id/editNoteHeading"
+            android:layout_marginTop="164dp"
             android:background="@drawable/pink_border"
-            android:layout_below="@id/editNoteTitle"
-            android:layout_marginTop="12dp" />
+            android:fontFamily="@font/poppins"
+            android:gravity="top"
+            android:hint="Enter the description"
+            android:padding="12dp"
+            android:textSize="18sp" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/editNoteFab"
             android:layout_width="wrap_content"

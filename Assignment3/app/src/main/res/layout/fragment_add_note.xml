@@ -33,17 +33,31 @@
             android:maxLines="1"
             android:padding="12dp"
             android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/addNoteDateTimeInput"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/addNoteTitle"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/pink_border"
+            android:hint="Select date and time"
+            android:focusable="false"
+            android:clickable="true"
+            android:padding="12dp"
+            android:textSize="18sp"/>
+
         <EditText
             android:id="@+id/addNoteDesc"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter the description"
-            android:gravity="top"
-            android:padding="12dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins"
-            android:background="@drawable/pink_border"
+            android:layout_width="399dp"
+            android:layout_height="488dp"
             android:layout_below="@id/addNoteTitle"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="88dp"
+            android:background="@drawable/pink_border"
+            android:fontFamily="@font/poppins"
+            android:gravity="top"
+            android:hint="Enter the description"
+            android:padding="12dp"
+            android:textSize="18sp" />
     </RelativeLayout>
 </layout>
