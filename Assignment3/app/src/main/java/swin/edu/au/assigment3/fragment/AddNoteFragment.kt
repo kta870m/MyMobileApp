@@ -55,7 +55,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), MenuProvider {
         notesViewModel = (activity as MainActivity).noteViewModel
         addNoteView = view
 
-        // DateTime Picker ở đây:
         binding.addNoteDateTimeInput.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)

@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             updateUI()
         }
 
-        // Customize RatingBar star color to yello
+        // Customize RatingBar star color to yellow
         val stars = binding.ratingBar.progressDrawable as LayerDrawable
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP)
 

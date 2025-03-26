@@ -3,6 +3,7 @@ package swin.edu.au.assigment3.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginTop
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -45,12 +46,11 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         holder.itemBinding.noteDesc.text = currentNote.noteDesc
         holder.itemBinding.noteDateTime.text = currentNote.noteDateTime
 
-        // Nếu noteDateTime không rỗng thì hiển thị, ngược lại ẩn đi
         if (currentNote.noteDateTime.isNotEmpty()) {
             holder.itemBinding.noteDateTime.visibility = View.VISIBLE
             holder.itemBinding.noteDateTime.text = currentNote.noteDateTime
         } else {
-            holder.itemBinding.noteDateTime.visibility = View.GONE
+            holder.itemBinding.dateLinearLayout.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener{

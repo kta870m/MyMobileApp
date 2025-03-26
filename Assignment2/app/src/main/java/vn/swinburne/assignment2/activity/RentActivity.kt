@@ -98,7 +98,6 @@ class RentActivity : AppCompatActivity() {
                 AppUtils.playSound(this, "failed")
                 return@setOnClickListener
             }
-
             // Check selected chips and add cost
             if (binding.chipExtraStrings.isChecked) totalCost += instrument.accessories.values.toList()[0]
             if (binding.chipCarryingCase.isChecked) totalCost += instrument.accessories.values.toList()[2]
