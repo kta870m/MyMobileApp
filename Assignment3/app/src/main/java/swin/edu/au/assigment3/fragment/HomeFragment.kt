@@ -1,5 +1,6 @@
 package swin.edu.au.assigment3.fragment
 
+// Import statements for necessary Android and Jetpack components
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +23,7 @@ import swin.edu.au.assigment3.databinding.FragmentHomeBinding
 import swin.edu.au.assigment3.model.Note
 import swin.edu.au.assigment3.viewmodel.NoteViewModel
 
-
+// Fragment for displaying the home screen with a list of notes
 class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextListener, MenuProvider {
     private var homeBinding: FragmentHomeBinding? = null
     private val binding get() = homeBinding!!
@@ -30,15 +31,16 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
     private lateinit var notesViewModel : NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
 
+    // Inflate the layout for this fragment
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    // Called after the view is fully created
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val menuHost: MenuHost = requireActivity()
@@ -47,11 +49,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         notesViewModel = (activity as MainActivity).noteViewModel
         setupHomeRecycleView()
 
+        // Navigate to the AddNoteFragment when the FloatingActionButton is clicked
         binding.addNoteFab.setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_addNoteFragment)
         }
     }
 
+    // Update the UI based on whether there are notes or not
     private fun updateUI(note: List<Note>?){
      if(note != null){
          if(note.isNotEmpty()){
@@ -64,6 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
      }
     }
 
+    // Set up the RecyclerView with StaggeredGridLayoutManager and the adapter
     private fun setupHomeRecycleView(){
         noteAdapter = NoteAdapter()
         binding.homeRecyclerView.apply {
@@ -73,6 +78,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
 
         activity?.let {
+            // Observe changes in the note list from the ViewModel and update the RecyclerView
             notesViewModel.getAllNotes().observe(viewLifecycleOwner){ note ->
                 noteAdapter.differ.submitList(note)
                 updateUI(note)
@@ -80,6 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
     }
 
+    // Perform a search for notes based on the user's query
     private fun searchNote(query: String?){
         val searchQuery = "%$query%"
         notesViewModel.searchNote(searchQuery).observe(this){
@@ -87,10 +94,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
     }
 
+    // Handle submission of the search query
     override fun onQueryTextSubmit(query: String?): Boolean {
         return false
     }
 
+    // Handle changes to the search query
     override fun onQueryTextChange(newText: String?): Boolean {
         if(newText!= null){
             searchNote(newText)
@@ -99,11 +108,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         return true
     }
 
+    // Clean up the binding when the fragment is destroyed to avoid memory leaks
     override fun onDestroy() {
         super.onDestroy()
         homeBinding = null
     }
 
+    // Inflate the menu and set up the SearchView
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menu.clear()
         menuInflater.inflate(R.menu.home_menu, menu)
@@ -112,6 +123,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         menuSearch.setOnQueryTextListener(this)
     }
 
+    // Handle menu item selections
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return false
     }
